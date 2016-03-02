@@ -5,6 +5,10 @@ This is the iOS purchase SDK of adjust™. You can read more about adjust™ at
 
 ## Basic integration
 
+In order to use the adjust purchase SDK, you must **first enable fraud prevention**
+for your app. You can find the instructions in our official 
+[fraud prevention guide][fraud-prevention] documentation.
+
 We will describe the steps to integrate the adjust purchase SDK into your iOS project.
 We are going to assume that you use Xcode for your iOS development.
 
@@ -288,14 +292,15 @@ If you decide to do so, your method for handling the response can look like this
 }
 ```
 
-[adjust.com]:   http://adjust.com
-[cocoapods]:    http://cocoapods.org
-[carthage]:     https://github.com/Carthage/Carthage
-[dashboard]:    http://adjust.com
-[releases]:     https://github.com/adjust/ios_purchase_sdk/releases
-[drag]:         https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
-[add]:          https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/add.png
-[integration]:  https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/integration.png
+[adjust.com]:       http://adjust.com
+[cocoapods]:        http://cocoapods.org
+[fraud-prevention]: https://docs.adjust.com/en/fraud-prevention/
+[carthage]:         https://github.com/Carthage/Carthage
+[dashboard]:        http://adjust.com
+[releases]:         https://github.com/adjust/ios_purchase_sdk/releases
+[drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
+[add]:              https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/add.png
+[integration]:      https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/integration.png
 
 ## License
 
