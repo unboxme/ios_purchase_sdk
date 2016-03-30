@@ -141,6 +141,13 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     [ADJPLogger debug:@"Sending verification request to adjust backend"];
 
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+
+    if (self.config.sdkPrefix == nil) {
+        [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
+    } else {
+        [self parameters:parameters setString:[NSString stringWithFormat:@"%@@%@", kSdkVersion, self.config.sdkPrefix] forKey:@"sdk_version"];
+    }
+
     [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
     [self parameters:parameters setString:self.config.appToken forKey:@"app_token"];
     [self parameters:parameters setString:self.config.environment forKey:@"environment"];
