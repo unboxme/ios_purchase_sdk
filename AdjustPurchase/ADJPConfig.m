@@ -78,6 +78,17 @@ static const NSUInteger kAppTokenLength = 12;
         }
         
         return NO;
+    } else {
+        if ([self.environment isEqualToString:ADJPEnvironmentSandbox]) {
+            [ADJPLogger assert:@"SANDBOX: AdjustPurchase SDK is running in sandbox mode. Use this setting for testing. Don't forget to set the environment to `production` before publishing"];
+            return YES;
+        } else if ([self.environment isEqualToString:ADJPEnvironmentProduction]) {
+            [ADJPLogger assert:@"PRODUCTION: AdjustPurchase SDK is running in production mode. Use this setting only for the build that you want to publish. Set the environment to `sandbox` if you want to test your app!"];
+            return YES;
+        }
+
+        [ADJPLogger error:@"Unknown environment '%@'", self.environment];
+        return NO;
     }
     
     return YES;
