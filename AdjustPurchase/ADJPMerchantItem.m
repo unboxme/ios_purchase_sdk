@@ -16,7 +16,7 @@
 #pragma mark - Object lifecycle
 
 - (id)initWithReceipt:(NSData *)receipt
-          transaction:(SKPaymentTransaction *)transaction
+        transactionId:(NSString *)transactionId
      andResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     self = [super init];
 
@@ -25,7 +25,7 @@
     }
 
     _receipt = receipt;
-    _transaction = transaction;
+    _transactionId = transactionId;
     _responseBlock = responseBlock;
 
     return self;
@@ -47,8 +47,8 @@
         return NO;
     }
 
-    if (self.transaction == nil) {
-        message = @"Invalid transaction";
+    if (self.transactionId == nil) {
+        message = @"Invalid transaction identifier";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {
