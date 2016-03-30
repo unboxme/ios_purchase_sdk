@@ -14,7 +14,7 @@
 #import "ADJPVerificationInfo.h"
 #import "ADJPVerificationPackage.h"
 
-static NSString *kSdkVersion            = @"ios_purchase0.1.0";
+static NSString *kSdkVersion            = @"ios_purchase0.2.0";
 static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 @interface ADJPMerchant()
