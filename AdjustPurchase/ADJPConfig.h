@@ -33,6 +33,17 @@
 @property (nonatomic, readonly) NSString *environment;
 
 /**
+ *  @property   sdkPrefix
+ *
+ *  @brief      Please, do not use this property on your own!
+ *              It is meant for usage from other non-native adjust purchase SDKs.
+ *              Default sdk_version for native iOS SDK looks like: ios1.0.0
+ *              By adding prefix in (for example) Unity purchase SDK, value
+ *              of sdk_version parameter looks like this: unity1.0.0@ios1.0.0
+ */
+@property (nonatomic, readonly) NSString *sdkPrefix;
+
+/**
  *  @property   logLevel
  *
  *  @brief      The desired minimum log level (default: info)
