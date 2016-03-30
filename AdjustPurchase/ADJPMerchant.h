@@ -18,5 +18,8 @@
 - (void)verifyPurchase:(NSData *)receipt
         forTransaction:(SKPaymentTransaction *)transaction
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
+- (void)verifyPurchase:(NSData *)receipt
+      forTransactionId:(NSString *)transactionId
+     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
 
 @end

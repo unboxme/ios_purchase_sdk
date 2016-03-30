@@ -31,6 +31,12 @@
     [[AdjustPurchase getInstance] verifyPurchase:receipt forTransaction:transaction withResponseBlock:responseBlock];
 }
 
++ (void)verifyPurchase:(NSData *)receipt
+      forTransactionId:(NSString *)transactionId
+     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
+    [[AdjustPurchase getInstance] verifyPurchase:receipt forTransactionId:transactionId withResponseBlock:responseBlock];
+}
+
 #pragma mark - Private methods
 
 + (id)getInstance {
@@ -80,6 +86,31 @@
 
     // Everything initialized properly, proceed with verification request.
     [self.merchant verifyPurchase:receipt forTransaction:transaction withResponseBlock:responseBlock];
+}
+
+- (void)verifyPurchase:(NSData *)receipt
+      forTransactionId:(NSString *)transactionId
+     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
+    // If response block is not valid, ignore everything.
+    if (responseBlock == nil) {
+        [ADJPLogger error:@"Invalid response block"];
+        return;
+    }
+
+    // If merchant is not valid, check why config verification
+    // failed and report that to responseBlock given by user.
+    if (!self.merchant) {
+        ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+        info.message = self.errorMessage;
+        info.verificationState = ADJPVerificationStateNotVerified;
+
+        responseBlock(info);
+
+        return;
+    }
+
+    // Everything initialized properly, proceed with verification request.
+    [self.merchant verifyPurchase:receipt forTransactionId:transactionId withResponseBlock:responseBlock];
 }
 
 @end
