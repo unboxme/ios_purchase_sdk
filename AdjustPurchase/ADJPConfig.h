@@ -41,7 +41,7 @@
  *              By adding prefix in (for example) Unity purchase SDK, value
  *              of sdk_version parameter looks like this: unity1.0.0@ios1.0.0
  */
-@property (nonatomic, readonly) NSString *sdkPrefix;
+@property (nonatomic, copy) NSString *sdkPrefix;
 
 /**
  *  @property   logLevel
