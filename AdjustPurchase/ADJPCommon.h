@@ -30,21 +30,21 @@ typedef void(^ADJPVerificationAnswerBlock)(ADJPVerificationInfo *info);
  *  @brief  Possible ADJPLogger log levels.
  */
 typedef enum {
-    ADJPLogLevelVerbose   = 1,
-    ADJPLogLevelDebug     = 2,
-    ADJPLogLevelInfo      = 3,
-    ADJPLogLevelWarn      = 4,
-    ADJPLogLevelError     = 5,
-    ADJPLogLevelAssert    = 6,
-    ADJPLogLevelNone      = 7
+    ADJPLogLevelVerbose     = 1,
+    ADJPLogLevelDebug       = 2,
+    ADJPLogLevelInfo        = 3,
+    ADJPLogLevelWarn        = 4,
+    ADJPLogLevelError       = 5,
+    ADJPLogLevelAssert      = 6,
+    ADJPLogLevelNone        = 7
 } ADJPLogLevel;
 
 /**
  *  @brief  Possible states reported to adjustVerificationUpdate: method.
  */
 typedef enum {
-    ADJPVerificationStatePassed        = 0,
-    ADJPVerificationStateFailed        = 1,
-    ADJPVerificationStateUnknown       = 2,
-    ADJPVerificationStateNotVerified  = 3
+    ADJPVerificationStatePassed         = 0,
+    ADJPVerificationStateFailed         = 1,
+    ADJPVerificationStateUnknown        = 2,
+    ADJPVerificationStateNotVerified    = 3
 } ADJPVerificationState;
