@@ -15,4 +15,6 @@
 @property (nonatomic, retain) NSDictionary *parameters;
 @property (nonatomic, weak) ADJPVerificationAnswerBlock responseBlock;
 
+- (NSString *)extendedString;
+
 @end

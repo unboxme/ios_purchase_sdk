@@ -21,6 +21,8 @@ static NSString * const kBaseUrl        = @"https://ssrv.adjust.com/verify";
 
 + (void)sendURLRequestForPackage:(ADJPVerificationPackage *)package
                  responseHandler:(void (^)(NSDictionary *response, ADJPVerificationPackage *package))responseHandler {
+    [ADJPLogger verbose:[package extendedString]];
+
     Class NSURLSessionClass = NSClassFromString(@"NSURLSession");
 
     if (NSURLSessionClass != nil) {

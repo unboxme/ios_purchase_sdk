@@ -145,10 +145,9 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     if (self.config.sdkPrefix == nil) {
         [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
     } else {
-        [self parameters:parameters setString:[NSString stringWithFormat:@"%@@%@", kSdkVersion, self.config.sdkPrefix] forKey:@"sdk_version"];
+        [self parameters:parameters setString:[NSString stringWithFormat:@"%@@%@", self.config.sdkPrefix, kSdkVersion] forKey:@"sdk_version"];
     }
 
-    [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
     [self parameters:parameters setString:self.config.appToken forKey:@"app_token"];
     [self parameters:parameters setString:self.config.environment forKey:@"environment"];
     [self parameters:parameters setString:transactionId forKey:@"transaction_id"];
