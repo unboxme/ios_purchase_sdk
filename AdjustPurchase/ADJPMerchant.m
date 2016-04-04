@@ -63,16 +63,18 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
         NSString *errorMessage;
 
         // Check validity of receipt and transaction object.
-        if ([item isValid:errorMessage]) {
-            [self asyncAddItem:item];
-            [self asyncProcessItem];
-        } else {
+        if (![item isValid:errorMessage]) {
             ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
             info.message = errorMessage;
             info.verificationState = ADJPVerificationStateNotVerified;
 
             responseBlock(info);
+
+            return;
         }
+
+        [self asyncAddItem:item];
+        [self asyncProcessItem];
     });
 }
 
@@ -86,16 +88,18 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
         NSString *errorMessage;
 
         // Check validity of receipt and transaction object.
-        if ([item isValid:errorMessage]) {
-            [self asyncAddItem:item];
-            [self asyncProcessItem];
-        } else {
+        if (![item isValid:errorMessage]) {
             ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
             info.message = errorMessage;
             info.verificationState = ADJPVerificationStateNotVerified;
 
             responseBlock(info);
+
+            return;
         }
+
+        [self asyncAddItem:item];
+        [self asyncProcessItem];
     });
 }
 
