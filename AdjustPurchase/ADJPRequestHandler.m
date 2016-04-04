@@ -21,6 +21,8 @@ static NSString * const kBaseUrl        = @"https://ssrv.adjust.com/verify";
 
 + (void)sendURLRequestForPackage:(ADJPVerificationPackage *)package
                  responseHandler:(void (^)(NSDictionary *response, ADJPVerificationPackage *package))responseHandler {
+    [ADJPLogger verbose:[package extendedString]];
+
     Class NSURLSessionClass = NSClassFromString(@"NSURLSession");
 
     if (NSURLSessionClass != nil) {
@@ -167,7 +169,7 @@ static NSString * const kBaseUrl        = @"https://ssrv.adjust.com/verify";
     if (responseError != nil) {
         [ADJPLogger error:[responseError description]];
 
-        [response setObject:[NSNumber numberWithInt:ADJPVerificationStateFailed] forKey:@"adjust_state"];
+        [response setObject:[NSNumber numberWithInt:ADJPVerificationStateNotVerified] forKey:@"adjust_state"];
         [response setObject:[responseError localizedDescription] forKey:@"adjust_message"];
 
         if (urlResponse) {

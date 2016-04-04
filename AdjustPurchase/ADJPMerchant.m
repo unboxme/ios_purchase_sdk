@@ -14,7 +14,7 @@
 #import "ADJPVerificationInfo.h"
 #import "ADJPVerificationPackage.h"
 
-static NSString *kSdkVersion            = @"ios_purchase0.1.0";
+static NSString *kSdkVersion            = @"ios_purchase0.2.0";
 static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 @interface ADJPMerchant()
@@ -58,21 +58,48 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     dispatch_async(self.internalQueue, ^{
         ADJPMerchantItem *item = [[ADJPMerchantItem alloc] initWithReceipt:receipt
-                                                               transaction:transaction
+                                                             transactionId:transaction.transactionIdentifier
                                                           andResponseBlock:responseBlock];
         NSString *errorMessage;
 
         // Check validity of receipt and transaction object.
-        if ([item isValid:errorMessage]) {
-            [self asyncAddItem:item];
-            [self asyncProcessItem];
-        } else {
+        if (![item isValid:errorMessage]) {
             ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
             info.message = errorMessage;
             info.verificationState = ADJPVerificationStateNotVerified;
 
             responseBlock(info);
+
+            return;
         }
+
+        [self asyncAddItem:item];
+        [self asyncProcessItem];
+    });
+}
+
+- (void)verifyPurchase:(NSData *)receipt
+      forTransactionId:(NSString *)transactionId
+     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
+    dispatch_async(self.internalQueue, ^{
+        ADJPMerchantItem *item = [[ADJPMerchantItem alloc] initWithReceipt:receipt
+                                                             transactionId:transactionId
+                                                          andResponseBlock:responseBlock];
+        NSString *errorMessage;
+
+        // Check validity of receipt and transaction object.
+        if (![item isValid:errorMessage]) {
+            ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+            info.message = errorMessage;
+            info.verificationState = ADJPVerificationStateNotVerified;
+
+            responseBlock(info);
+
+            return;
+        }
+
+        [self asyncAddItem:item];
+        [self asyncProcessItem];
     });
 }
 
@@ -96,7 +123,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     ADJPMerchantItem *currentItem = [self.items objectAtIndex:0];
 
     [self verifyReceipt:currentItem.receipt
-         forTransaction:currentItem.transaction
+       forTransactionId:currentItem.transactionId
       withResponseBlock:currentItem.responseBlock];
 }
 
@@ -113,15 +140,21 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 }
 
 - (void)verifyReceipt:(NSData *)receipt
-       forTransaction:(SKPaymentTransaction *)transaction
+     forTransactionId:(NSString *)transactionId
     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     [ADJPLogger debug:@"Sending verification request to adjust backend"];
 
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
+
+    if (self.config.sdkPrefix == nil) {
+        [self parameters:parameters setString:kSdkVersion forKey:@"sdk_version"];
+    } else {
+        [self parameters:parameters setString:[NSString stringWithFormat:@"%@@%@", self.config.sdkPrefix, kSdkVersion] forKey:@"sdk_version"];
+    }
+
     [self parameters:parameters setString:self.config.appToken forKey:@"app_token"];
     [self parameters:parameters setString:self.config.environment forKey:@"environment"];
-    [self parameters:parameters setString:transaction.transactionIdentifier forKey:@"transaction_id"];
+    [self parameters:parameters setString:transactionId forKey:@"transaction_id"];
     [self parameters:parameters setString:[receipt base64EncodedStringWithOptions:0] forKey:@"receipt"];
 
     ADJPVerificationPackage *verificationPackage = [[ADJPVerificationPackage alloc] init];

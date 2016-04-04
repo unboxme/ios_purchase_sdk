@@ -38,4 +38,17 @@
         forTransaction:(id)transaction
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
 
+/**
+ *  @brief  Method used to verify In-App-Purchase receipt.
+ *
+ *  @param  receipt         Apple receipt.
+ *  @param  transactionId   SKPaymentTransaction identifier obtained after transaction
+ *                          state became SKPaymentTransactionStatePurchased and
+ *                          after transaction has been finished.
+ *  @param  responseBlock   Block which will get executed once verification info is available.
+ */
++ (void)verifyPurchase:(NSData *)receipt
+      forTransactionId:(NSString *)transactionId
+     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
+
 @end
