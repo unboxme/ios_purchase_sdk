@@ -6,15 +6,13 @@ set -e
 # Go to root folder
 cd ..
 
-# Remove folders
+# Clean the folders
 rm -rf Frameworks/Static
 rm -rf Frameworks/Dynamic
-rm -rf Frameworks/Carthage
 
-# Create needed folders if they don't exist
+# Create needed folders
 mkdir -p Frameworks/Static
 mkdir -p Frameworks/Dynamic
-mkdir -p Frameworks/Carthage
 
 # Build static AdjustPurchaseSdk.framework
 xcodebuild -target AdjustPurchaseStatic -configuration Release
@@ -25,5 +23,5 @@ xcodebuild -target AdjustPurchaseSdk -configuration Release
 # Build Carthage AdjustPurchaseSdk.framework
 carthage build --no-skip-current
 
-# Copy build Carthage framework to Frameworks folder
-cp -R Carthage/Build/iOS/* Frameworks/Carthage/
+# Copy build Carthage framework to Frameworks/Dynamic folder
+cp -R Carthage/Build/iOS/* Frameworks/Dynamic/
