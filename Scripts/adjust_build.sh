@@ -6,6 +6,11 @@ set -e
 # Go to root folder
 cd ..
 
+# Remove folders
+rm -rf Frameworks/Static
+rm -rf Frameworks/Dynamic
+rm -rf Frameworks/Carthage
+
 # Create needed folders if they don't exist
 mkdir -p Frameworks/Static
 mkdir -p Frameworks/Dynamic
