@@ -269,24 +269,12 @@ If you decide to do so, your method for handling the response can look like this
         [Adjust trackEvent:event];
     } else if ([info verificationState] == ADJVerificationStateFailed) {
         ADJEvent *event = [[ADJEvent alloc] initWithEventToken:@"{RevenueEventFailedToken}"];
-
-        [event setRevenue:0.01 currency:@"EUR"];
-        [event setTransactionId:@"{YourTransactionId}"];
-
         [Adjust trackEvent:event];
     } else if ([info verificationState] == ADJPVerificationStateUnknown) {
         ADJEvent *event = [[ADJEvent alloc] initWithEventToken:@"{RevenueEventUnknownToken}"];
-
-        [event setRevenue:0.01 currency:@"EUR"];
-        [event setTransactionId:@"{YourTransactionId}"];
-
         [Adjust trackEvent:event];
     } else {
         ADJEvent *event = [[ADJEvent alloc] initWithEventToken:@"{RevenueEventNotVerifiedToken}"];
-
-        [event setRevenue:0.01 currency:@"EUR"];
-        [event setTransactionId:@"{YourTransactionId}"];
-
         [Adjust trackEvent:event];
     }
 }
