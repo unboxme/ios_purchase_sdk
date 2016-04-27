@@ -280,6 +280,8 @@ If you decide to do so, your method for handling the response can look like this
 }
 ```
 
+Purchase Verification is not intended to be used to approve/reject delivery of goods sold. Purchase Verification is intended to align reported transaction data with actual transaction data.
+
 [adjust.com]:       http://adjust.com
 [cocoapods]:        http://cocoapods.org
 [fraud-prevention]: https://docs.adjust.com/en/fraud-prevention/
