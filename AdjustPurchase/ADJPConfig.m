@@ -36,7 +36,7 @@ static const NSUInteger kAppTokenLength = 12;
     NSString *message;
 
     if (self.appToken == nil) {
-        message = @"Invalid app token";
+        message = @"App token can't be nil";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {
@@ -47,7 +47,7 @@ static const NSUInteger kAppTokenLength = 12;
     }
 
     if ([self.appToken length] != kAppTokenLength) {
-        message = @"Invalid app token";
+        message = @"App token must be 12 characters long";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {
@@ -58,7 +58,7 @@ static const NSUInteger kAppTokenLength = 12;
     }
 
     if (self.environment == nil) {
-        message = @"Invalid environment";
+        message = @"Environment can't be nil";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {
@@ -68,30 +68,22 @@ static const NSUInteger kAppTokenLength = 12;
         return NO;
     }
 
-    if ([self.environment isEqualToString:ADJPEnvironmentSandbox] == NO &&
-        [self.environment isEqualToString:ADJPEnvironmentProduction] == NO) {
-        message = @"Invalid environment";
-        [ADJPLogger error:message];
-
-        if (errorMessage != nil) {
-            errorMessage = message;
-        }
-        
-        return NO;
+    if ([self.environment isEqualToString:ADJPEnvironmentSandbox]) {
+        [ADJPLogger assert:@"SANDBOX: AdjustPurchase is running in sandbox mode. Use this setting for testing. Don't forget to set the environment to `production` before publishing!"];
+        return YES;
+    } else if ([self.environment isEqualToString:ADJPEnvironmentProduction]) {
+        [ADJPLogger assert:@"PRODUCTION: AdjustPurchase is running in production mode. Use this setting only for the build that you want to publish. Set the environment to `sandbox` if you want to test your app!"];
+        return YES;
     } else {
-        if ([self.environment isEqualToString:ADJPEnvironmentSandbox]) {
-            [ADJPLogger assert:@"SANDBOX: AdjustPurchase SDK is running in sandbox mode. Use this setting for testing. Don't forget to set the environment to `production` before publishing"];
-            return YES;
-        } else if ([self.environment isEqualToString:ADJPEnvironmentProduction]) {
-            [ADJPLogger assert:@"PRODUCTION: AdjustPurchase SDK is running in production mode. Use this setting only for the build that you want to publish. Set the environment to `sandbox` if you want to test your app!"];
-            return YES;
+        message = [NSString stringWithFormat:@"Unknown environment '%@'", self.environment];
+        [ADJPLogger error:message];
+
+        if (errorMessage != nil) {
+            errorMessage = message;
         }
 
-        [ADJPLogger error:@"Unknown environment '%@'", self.environment];
         return NO;
     }
-    
-    return YES;
 }
 
 @end
