@@ -14,7 +14,7 @@
 #import "ADJPVerificationInfo.h"
 #import "ADJPVerificationPackage.h"
 
-static NSString *kSdkVersion            = @"ios_purchase0.2.0";
+static NSString *kSdkVersion            = @"ios_purchase0.2.1";
 static NSString *kReceiptRegexPattern   = @"^[A-Za-z0-9+/]*=?=?$";
 static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
