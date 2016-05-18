@@ -15,6 +15,7 @@
 #import "ADJPVerificationPackage.h"
 
 static NSString *kSdkVersion            = @"ios_purchase0.2.0";
+static NSString *kReceiptRegexPattern   = @"^[A-Za-z0-9+/]*=?=?$";
 static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 @interface ADJPMerchant()
@@ -23,6 +24,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 @property (nonatomic) NSMutableArray *items;
 @property (nonatomic) dispatch_queue_t internalQueue;
+@property (nonatomic) NSRegularExpression *receiptRegex;
 
 @property (nonatomic) ADJPConfig *config;
 
@@ -47,6 +49,20 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     dispatch_async(self.internalQueue, ^{
         self.items = [[NSMutableArray alloc] init];
     });
+
+    [ADJPLogger error:@"Test 1"];
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:kReceiptRegexPattern
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+
+    [ADJPLogger error:@"Test 2"];
+    if (error != nil) {
+        [ADJPLogger error:@"Receipt link regex rule error (%@)", [error description]];
+    } else {
+        [ADJPLogger error:@"Test 3"];
+        self.receiptRegex = regex;
+    }
 
     return self;
 }
@@ -155,7 +171,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     [self parameters:parameters setString:self.config.appToken forKey:@"app_token"];
     [self parameters:parameters setString:self.config.environment forKey:@"environment"];
     [self parameters:parameters setString:transactionId forKey:@"transaction_id"];
-    [self parameters:parameters setString:[receipt base64EncodedStringWithOptions:0] forKey:@"receipt"];
+    [self parameters:parameters setString:[self getEncodedReceipt:receipt] forKey:@"receipt"];
 
     ADJPVerificationPackage *verificationPackage = [[ADJPVerificationPackage alloc] init];
     verificationPackage.parameters = parameters;
@@ -199,6 +215,27 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     dispatch_async(self.internalQueue, ^{
         [self asyncRemoveItem];
     });
+}
+
+- (NSString *)getEncodedReceipt:(NSData *)receipt {
+    NSString *stringReceipt = [[NSString alloc] initWithData:receipt encoding:NSUTF8StringEncoding];
+
+    if (stringReceipt != nil) {
+        NSArray<NSTextCheckingResult *> *matches = [self.receiptRegex matchesInString:stringReceipt options:0 range:NSMakeRange(0, [stringReceipt length])];
+
+        if ([matches count] == 0) {
+            [ADJPLogger debug:@"Receipt is not base64 encoded"];
+            return [receipt base64EncodedStringWithOptions:0];
+        }
+
+        [ADJPLogger debug:@"Receipt is base64 encoded"];
+
+        return stringReceipt;
+    }
+
+    [ADJPLogger debug:@"Receipt is not base64 encoded"];
+
+    return [receipt base64EncodedStringWithOptions:0];
 }
 
 @end
