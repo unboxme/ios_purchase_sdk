@@ -37,7 +37,7 @@
     NSString *message;
 
     if (self.receipt == nil) {
-        message = @"Invalid receipt";
+        message = @"Receipt can't be nil";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {
@@ -48,7 +48,7 @@
     }
 
     if (self.transactionId == nil) {
-        message = @"Invalid transaction identifier";
+        message = @"Transaction ID can't be nil";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {

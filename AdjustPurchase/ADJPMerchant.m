@@ -50,17 +50,14 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
         self.items = [[NSMutableArray alloc] init];
     });
 
-    [ADJPLogger error:@"Test 1"];
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:kReceiptRegexPattern
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
 
-    [ADJPLogger error:@"Test 2"];
     if (error != nil) {
         [ADJPLogger error:@"Receipt link regex rule error (%@)", [error description]];
     } else {
-        [ADJPLogger error:@"Test 3"];
         self.receiptRegex = regex;
     }
 
@@ -81,6 +78,8 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
         // Check validity of receipt and transaction object.
         if (![item isValid:errorMessage]) {
             ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+
+            info.statusCode = -1;
             info.message = errorMessage;
             info.verificationState = ADJPVerificationStateNotVerified;
 
@@ -106,6 +105,8 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
         // Check validity of receipt and transaction object.
         if (![item isValid:errorMessage]) {
             ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+
+            info.statusCode = -1;
             info.message = errorMessage;
             info.verificationState = ADJPVerificationStateNotVerified;
 
