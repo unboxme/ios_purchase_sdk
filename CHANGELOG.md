@@ -1,3 +1,12 @@
+### Version 0.2.1 (18th May 2016)
+#### Added
+- Added check to determine if receipt is already base64 encoded.
+
+#### Changed
+- Improved logging and status code reporting.
+
+---
+
 ### Version 0.2.0 (4th April 2016)
 #### Added
 - Added possibility to set SDK prefix (for non-native purchase SDK usage only).
