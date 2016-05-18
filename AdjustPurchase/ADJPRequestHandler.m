@@ -169,7 +169,7 @@ static NSString * const kBaseUrl        = @"https://ssrv.adjust.com/verify";
     if (responseError != nil) {
         [ADJPLogger error:[responseError description]];
 
-        [response setObject:[NSNumber numberWithInt:ADJPVerificationStateNotVerified] forKey:@"adjust_state"];
+        [response setObject:[NSNumber numberWithInt:ADJPVerificationStateUnknown] forKey:@"adjust_state"];
         [response setObject:[responseError localizedDescription] forKey:@"adjust_message"];
 
         if (urlResponse) {

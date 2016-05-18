@@ -76,6 +76,8 @@
     // failed and report that to responseBlock given by user.
     if (!self.merchant) {
         ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+
+        info.statusCode = -1;
         info.message = self.errorMessage;
         info.verificationState = ADJPVerificationStateNotVerified;
 
@@ -101,6 +103,8 @@
     // failed and report that to responseBlock given by user.
     if (!self.merchant) {
         ADJPVerificationInfo *info = [[ADJPVerificationInfo alloc] init];
+
+        info.statusCode = -1;
         info.message = self.errorMessage;
         info.verificationState = ADJPVerificationStateNotVerified;
 
