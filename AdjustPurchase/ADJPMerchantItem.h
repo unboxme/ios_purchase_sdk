@@ -14,11 +14,13 @@
 @interface ADJPMerchantItem : NSObject
 
 @property (nonatomic, readonly) NSData *receipt;
+@property (nonatomic, readonly) NSString *productId;
 @property (nonatomic, readonly) NSString *transactionId;
 @property (nonatomic, readonly) ADJPVerificationAnswerBlock responseBlock;
 
 - (id)initWithReceipt:(NSData *)receipt
         transactionId:(NSString *)transactionId
+            productId:(NSString *)productId
      andResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
 
 - (BOOL)isValid:(NSString *)errorMessage;

@@ -27,14 +27,16 @@
 
 + (void)verifyPurchase:(NSData *)receipt
         forTransaction:(id)transaction
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
-    [[AdjustPurchase getInstance] verifyPurchase:receipt forTransaction:transaction withResponseBlock:responseBlock];
+    [[AdjustPurchase getInstance] verifyPurchase:receipt forTransaction:transaction productId:productId withResponseBlock:responseBlock];
 }
 
 + (void)verifyPurchase:(NSData *)receipt
       forTransactionId:(NSString *)transactionId
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
-    [[AdjustPurchase getInstance] verifyPurchase:receipt forTransactionId:transactionId withResponseBlock:responseBlock];
+    [[AdjustPurchase getInstance] verifyPurchase:receipt forTransactionId:transactionId productId:productId withResponseBlock:responseBlock];
 }
 
 #pragma mark - Private methods
@@ -65,6 +67,7 @@
 
 - (void)verifyPurchase:(NSData *)receipt
         forTransaction:(id)transaction
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     // If response block is not valid, ignore everything.
     if (responseBlock == nil) {
@@ -87,11 +90,12 @@
     }
 
     // Everything initialized properly, proceed with verification request.
-    [self.merchant verifyPurchase:receipt forTransaction:transaction withResponseBlock:responseBlock];
+    [self.merchant verifyPurchase:receipt forTransaction:transaction productId:productId withResponseBlock:responseBlock];
 }
 
 - (void)verifyPurchase:(NSData *)receipt
       forTransactionId:(NSString *)transactionId
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     // If response block is not valid, ignore everything.
     if (responseBlock == nil) {
@@ -114,7 +118,7 @@
     }
 
     // Everything initialized properly, proceed with verification request.
-    [self.merchant verifyPurchase:receipt forTransactionId:transactionId withResponseBlock:responseBlock];
+    [self.merchant verifyPurchase:receipt forTransactionId:transactionId productId:productId withResponseBlock:responseBlock];
 }
 
 @end
