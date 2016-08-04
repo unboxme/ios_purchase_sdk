@@ -1,4 +1,4 @@
-### Version 1.0.0 (3rd August 2016)
+### Version 1.0.0 (4th August 2016)
 #### Added
 - Added `product ID` to the verification request.
 
