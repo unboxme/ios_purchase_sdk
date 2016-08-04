@@ -41,11 +41,11 @@ Since the release of iOS 8, Apple has introduced dynamic frameworks (also known 
 targeting iOS 8 or higher, you can use the adjust purchase SDK dynamic framework. Choose which framework you want to use – 
 static or dynamic – and add it to your project before continuing with [step 3](#step3).
 
-### 1. <a id="sdk-get"></a>Get the SDK
+### <a id="sdk-get"></a>Get the SDK
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
 
-### 2. <a id="sdk-add"></a>Add the SDK to your project
+### <a id="sdk-add"></a>Add the SDK to your project
 
 In Xcode's Project Navigator locate the `Supporting Files` group (or any other group of your choice). From Finder, drag the 
 `AdjustPurchase` subdirectory into Xcode's `Supporting Files` group.
@@ -57,7 +57,7 @@ the radio button to `Create groups`.
 
 ![][add]
 
-### <a id="sdk-integrate"></a>3. Integrate the SDK into your app
+### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
 #### <a id="sdk-import"></a>Import statement
 
@@ -125,7 +125,7 @@ with one of the following parameters:
 [config setLogLevel:ADJPLogLevelAssert];  // Disable errors as well.
 ```
 
-### <a id="verify-purchases"></a>4. Verify your purchases
+### <a id="verify-purchases"></a>Verify your purchases
 
 #### <a id="verification-request"></a>Make the verification request
 
@@ -221,7 +221,7 @@ correct state of your purchase verification. More details about these errors can
 * If `ADJPVerificationStateNotVerified` is reported, that means that the call to  
 `verifyPurchase:forTransaction:productId:withResponseBlock` method was done with invalid parameters.
 
-### <a id="track-purchases"></a>5. Track your verified purchases
+### <a id="track-purchases"></a>Track your verified purchases
 
 After a purchase is successfully verified, you can track it with our official adjust SDK and keep track of revenue in your 
 dashboard. You can also pass in an optional transaction ID created in an event in order to avoid tracking duplicate 
@@ -287,14 +287,16 @@ If you decide to do so, your method for handling the response can look like this
 Purchase Verification is not intended to be used to approve/reject delivery of goods sold. Purchase Verification is 
 intended to align reported transaction data with actual transaction data.
 
+[dashboard]:        http://adjust.com
 [adjust.com]:       http://adjust.com
+
+[carthage]:         https://github.com/Carthage/Carthage
+[releases]:         https://github.com/adjust/ios_purchase_sdk/releases
 [cocoapods]:        http://cocoapods.org
 [fraud-prevention]: https://docs.adjust.com/en/fraud-prevention/
-[carthage]:         https://github.com/Carthage/Carthage
-[dashboard]:        http://adjust.com
-[releases]:         https://github.com/adjust/ios_purchase_sdk/releases
-[drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
+
 [add]:              https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/add.png
+[drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
 [integration]:      https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/integration.png
 
 ## License
