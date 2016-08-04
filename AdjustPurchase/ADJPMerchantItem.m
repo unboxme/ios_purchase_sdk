@@ -17,6 +17,7 @@
 
 - (id)initWithReceipt:(NSData *)receipt
         transactionId:(NSString *)transactionId
+            productId:(NSString *)productId
      andResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     self = [super init];
 
@@ -25,6 +26,7 @@
     }
 
     _receipt = receipt;
+    _productId = productId;
     _transactionId = transactionId;
     _responseBlock = responseBlock;
 
@@ -49,6 +51,17 @@
 
     if (self.transactionId == nil) {
         message = @"Transaction ID can't be nil";
+        [ADJPLogger error:message];
+
+        if (errorMessage != nil) {
+            errorMessage = message;
+        }
+
+        return NO;
+    }
+
+    if (self.productId == nil) {
+        message = @"Product ID can't be nil";
         [ADJPLogger error:message];
 
         if (errorMessage != nil) {

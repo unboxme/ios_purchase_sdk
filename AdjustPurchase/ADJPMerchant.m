@@ -14,7 +14,7 @@
 #import "ADJPVerificationInfo.h"
 #import "ADJPVerificationPackage.h"
 
-static NSString *kSdkVersion            = @"ios_purchase0.2.1";
+static NSString *kSdkVersion            = @"ios_purchase1.0.0";
 static NSString *kReceiptRegexPattern   = @"^[A-Za-z0-9+/]*=?=?$";
 static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
@@ -68,10 +68,12 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 - (void)verifyPurchase:(NSData *)receipt
         forTransaction:(SKPaymentTransaction *)transaction
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     dispatch_async(self.internalQueue, ^{
         ADJPMerchantItem *item = [[ADJPMerchantItem alloc] initWithReceipt:receipt
                                                              transactionId:transaction.transactionIdentifier
+                                                                 productId:productId
                                                           andResponseBlock:responseBlock];
         NSString *errorMessage;
 
@@ -95,10 +97,12 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 - (void)verifyPurchase:(NSData *)receipt
       forTransactionId:(NSString *)transactionId
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     dispatch_async(self.internalQueue, ^{
         ADJPMerchantItem *item = [[ADJPMerchantItem alloc] initWithReceipt:receipt
                                                              transactionId:transactionId
+                                                                 productId:productId
                                                           andResponseBlock:responseBlock];
         NSString *errorMessage;
 
@@ -141,6 +145,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
     [self verifyReceipt:currentItem.receipt
        forTransactionId:currentItem.transactionId
+              productId:currentItem.productId
       withResponseBlock:currentItem.responseBlock];
 }
 
@@ -158,6 +163,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
 
 - (void)verifyReceipt:(NSData *)receipt
      forTransactionId:(NSString *)transactionId
+            productId:(NSString *)productId
     withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock {
     [ADJPLogger debug:@"Sending verification request to adjust backend"];
 
@@ -172,6 +178,7 @@ static const char* kInternalQueueName   = "io.adjust.PurchaseQueue";
     [self parameters:parameters setString:self.config.appToken forKey:@"app_token"];
     [self parameters:parameters setString:self.config.environment forKey:@"environment"];
     [self parameters:parameters setString:transactionId forKey:@"transaction_id"];
+    [self parameters:parameters setString:productId forKey:@"product_id"];
     [self parameters:parameters setString:[self getEncodedReceipt:receipt] forKey:@"receipt"];
 
     ADJPVerificationPackage *verificationPackage = [[ADJPVerificationPackage alloc] init];

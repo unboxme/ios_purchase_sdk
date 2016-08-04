@@ -17,9 +17,11 @@
 - (id)initWithConfig:(ADJPConfig *)config;
 - (void)verifyPurchase:(NSData *)receipt
         forTransaction:(SKPaymentTransaction *)transaction
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
 - (void)verifyPurchase:(NSData *)receipt
       forTransactionId:(NSString *)transactionId
+             productId:(NSString *)productId
      withResponseBlock:(ADJPVerificationAnswerBlock)responseBlock;
 
 @end
