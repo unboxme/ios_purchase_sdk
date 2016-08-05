@@ -5,17 +5,18 @@ This is the iOS purchase SDK of adjust™. You can read more about adjust™ at 
 ## Table of contents
 
 * [Basic integration](#basic-integration)
-    * [Get the SDK](#sdk-get)
-    * [Add the SDK to your project](#sdk-add)
-    * [Integrate the SDK into your app](#sdk-integrate)
-        * [Import statement](#sdk-import)
-        * [Basic setup](#basic-setup)
-        * [Adjust Purchase logging](#sdk-logging)
-    * [Verify your purchases](#verify-purchases)
-        * [Make the verification request](#verification-request)
-        * [Process verification response](#verification-response)
-    * [Track your verified purchases](#track-purchases)
+   * [Get the SDK](#sdk-get)
+   * [Add the SDK to your project](#sdk-add)
+   * [Integrate the SDK into your app](#sdk-integrate)
+      * [Import statement](#sdk-import)
+      * [Basic setup](#basic-setup)
+      * [Adjust Purchase logging](#sdk-logging)
+   * [Verify your purchases](#verify-purchases)
+      * [Make the verification request](#verification-request)
+      * [Process verification response](#verification-response)
+   * [Track your verified purchases](#track-purchases)
 * [Best practices](#best-practices)
+* [License](#license)
 
 ## <a id="basic-integration">Basic integration
 
@@ -299,7 +300,7 @@ intended to align reported transaction data with actual transaction data.
 [drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
 [integration]:      https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/integration.png
 
-## License
+## <a id="license"></a>License
 
 The adjust purchase SDK is licensed under the MIT License.
 
