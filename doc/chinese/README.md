@@ -138,7 +138,7 @@ NSString *environment = ADJPEnvironmentProduction;
                                 forTransaction:transaction
                                 productId:@"your_product_id"
                              withResponseBlock:^(ADJPVerificationInfo *info) {
-                                 // Process ADJPVerificationInfo object... 
+                                 // Process ADJPVerificationInfo object...
                                  [self adjustVerificationUpdate:info];
                              }];
 
@@ -191,7 +191,7 @@ ADJPVerificationStateUnknown        - Purchase verification state unknown.
 ADJPVerificationStateNotVerified    - Purchase was not verified.
 ```
 
-* 如果苹果服务器成功验证购买，将会报告 `ADJPVerificationStatePassed` 连带状态码 `200` 。 
+* 如果苹果服务器成功验证购买，将会报告 `ADJPVerificationStatePassed` 连带状态码 `200` 。
 * 如果苹果服务器将购买视为无效，则会报告 `ADJPVerificationStateFailed` 连带状态码 `406` 。
 * 如果苹果服务器并未对我们的收入验证请求给予回复，将会报告 `ADJPVerificationStateUnknown` 连带状态码 `204` 。此种情况意味着我们无法从苹果服务器中获取有关收入有效性的任何信息。这和购买本身并无联系，购买可能是有效或者无效的。报告此种状态的原因也有可能是发生了阻止我们报告收入验证正确状态的情况。您可以在 `ADJPVerificationInfo` 对象上的 `message` 字段中找到关于此故障的更多详细信息。
 * 如果报告了 `ADJPVerificationStateNotVerified` ， 则表示使用了无效参数调用 `verifyPurchase:forTransaction:productId:withResponseBlock` 方法。
@@ -259,7 +259,7 @@ ADJPVerificationStateNotVerified    - Purchase was not verified.
 [carthage]:         https://github.com/Carthage/Carthage
 [releases]:         https://github.com/adjust/ios_purchase_sdk/releases
 [cocoapods]:        http://cocoapods.org
-[fraud-prevention]: https://docs.adjust.com/en/fraud-prevention/
+[fraud-prevention]: https://docs.adjust.com/zh/fraud-prevention/
 
 [add]:              https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/add.png
 [drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
