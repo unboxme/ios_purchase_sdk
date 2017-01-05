@@ -259,7 +259,7 @@ ADJPVerificationStateNotVerified    - Purchase was not verified.
 [carthage]:         https://github.com/Carthage/Carthage
 [releases]:         https://github.com/adjust/ios_purchase_sdk/releases
 [cocoapods]:        http://cocoapods.org
-[fraud-prevention]: https://docs.adjust.com/en/fraud-prevention/
+[fraud-prevention]: https://docs.adjust.com/zh/fraud-prevention/
 
 [add]:              https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/add.png
 [drag]:             https://raw.github.com/adjust/sdks/master/Resources/ios_purchase/drag.png
