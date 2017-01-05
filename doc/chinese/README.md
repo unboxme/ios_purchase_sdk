@@ -1,6 +1,6 @@
 ## 摘要
 
-这是 adjust™ 的iOS购买SDK。您可以访问[adjust.com]了解更多有关 adjust™ 的信息。
+这是 adjust™ 的iOS收入验证SDK。您可以访问[adjust.com]了解更多有关 adjust™ 的信息。
 
 ## 目录
 
@@ -20,9 +20,9 @@
 
 ## <a id="basic-integration">基本集成
 
-您必须 **首先为您的应用启用防作弊** ，以使用adjust购买SDK。您可以在我们的官方[防作弊指南][fraud-prevention]文档中找到相关说明。
+您必须 **首先为您的应用启用防作弊** ，以使用adjust收入验证SDK。您可以在我们的官方[防作弊指南][fraud-prevention]文档中找到相关说明。
 
-以下是将adjust购买SDK集成至iOS项目的步骤。我们假定您将Xcode用于iOS开发。
+以下是将adjust收入验证SDK集成至iOS项目的步骤。我们假定您将Xcode用于iOS开发。
 
 如果您正在使用[Carthage][carthage], 您可以添加如下代码行至 `Cartfile` 并从[步骤 3](#step3)继续:
 
@@ -30,12 +30,12 @@
 github "adjust/ios_purchase_sdk"
 ```
 
-您还可以通过将adjust购买SDK作为框架添加至您的项目来集成它。您可以在[发布专页][releases]找到四个归档文件：
+您还可以通过将adjust收入验证SDK作为框架添加至您的项目来集成它。您可以在[发布专页][releases]找到四个归档文件：
 
 * `AdjustPurchaseSdkStatic.framework.zip`
 * `AdjustPurchaseSdkDynamic.framework.zip`
 
-自iOS 8发布后, 苹果已经引入了动态框架（也称为嵌入式框架）。如果您的应用目标平台是iOS 8或者以上版本，您可以使用adjust购买SDK动态框架。您可以自由选择您想要使用的框架——静态或动态——将其添加至您的项目，然后继续[步骤 3](#step3)。
+自iOS 8发布后, 苹果已经引入了动态框架（也称为嵌入式框架）。如果您的应用目标平台是iOS 8或者以上版本，您可以使用adjust收入验证SDK动态框架。您可以自由选择您想要使用的框架——静态或动态——将其添加至您的项目，然后继续[步骤 3](#step3)。
 
 ### <a id="sdk-get"></a>获取SDK
 
@@ -67,7 +67,7 @@ github "adjust/ios_purchase_sdk"
 #import <AdjustPurchaseSdk/AdjustPurchase.h>
 ```
 
-让我们从设置iOS购买SDK开始。
+让我们从设置iOS收入验证SDK开始。
 
 #### <a id="basic-setup"></a>基本设置
 
@@ -89,7 +89,7 @@ ADJPConfig *config = [[ADJPConfig alloc] initWithAppToken:yourAppToken andEnviro
 
 使用您的应用识别码替换 `{YourAppToken}` 。您可以在[控制面板]中找到该识别码。
 
-取决于您的应用制作是用于测试或产品开发目的，您必须将 `environment` （环境模式）设为以下值之一：
+鉴于您的应用是用于测试还是产品开发，您必须将 `environment` （环境模式）设为以下值之一：
 
 ```objc
 NSString *environment = ADJPEnvironmentSandbox;
@@ -98,7 +98,7 @@ NSString *environment = ADJPEnvironmentProduction;
 
 **重要:** 仅当您或其他人测试您的应用时，该值应设为 `ADJPEnvironmentSandbox` 。在您发布应用之前，请确保将环境改设为 `ADJPEnvironmentProduction` 。再次研发和测试时，请将其设回为 `ADJPEnvironmentSandbox` 。
 
-我们按照设置的环境来区分真实流量和来自测试设备的测试流量。非常重要的是，您必须始终让该值保持有意义！
+我们按照设置的环境来区分真实流量和来自测试设备的测试流量，所以正确使用环境参数是非常重要的！
 
 #### <a id="sdk-logging"></a>Adjust购买日志
 
@@ -161,7 +161,7 @@ NSString *environment = ADJPEnvironmentProduction;
 }
 ```
 
-您需要传递以下参数，以调用adjust购买SDK的方法来发出验证请求：
+您需要传递以下参数，以调用adjust收入验证SDK的方法来发出验证请求：
 
 ```objc
 receipt         // App receipt of NSData type
