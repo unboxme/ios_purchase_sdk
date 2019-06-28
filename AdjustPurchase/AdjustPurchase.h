@@ -23,7 +23,7 @@
  *
  *  @param  config  ADJPConfig object.
  */
-+ (void)init:(ADJPConfig *)config;
++ (void)init:(ADJPConfig *)config NS_SWIFT_NAME(configure(_:));
 
 /**
  *  @brief  Method used to verify In-App-Purchase receipt.
